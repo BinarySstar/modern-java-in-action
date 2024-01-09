@@ -17,7 +17,7 @@
 
 다음은 디렉토리에서 모든 파일을 찾는 코드이다.
 
-```
+```Java
 //자바 8 이전
 File[] hiddenFiles = new File(".").listFiles(new FileFilter() {
     public boolean accept(File file) {
@@ -26,7 +26,7 @@ File[] hiddenFiles = new File(".").listFiles(new FileFilter() {
 })
 ```
 
-```
+```Java
 //자바 8 : 메서드 참조 적용
 File[] hiddenFiles = new File(".").listFiles(File::isHidden);
 ```
@@ -44,7 +44,7 @@ File 클래스에서는 isHidden() 메서드가 존재하는데 굳이 FileFilte
 
 Apple 클래스와 getColor 메서드가 있고, Apples 리스트를 포함하는 변수 inventory가 있다고 가정할 때, 원하는 조건에 맞게 리스트를 반환하는 프로그램을 구현해 보자. 이때 누군가 150그램 이상인 사과만 필터링하고 싶다면 다음과 같이 코드를 작성할 수 있을 것이다.
 
-```
+```Java
 public static List<Apple> filterHeavyApples(List<Apple> inventory) {
     List<Apple> result = new ArrayList<>();
     for (Apple apple : inventory) {
@@ -60,7 +60,7 @@ public static List<Apple> filterHeavyApples(List<Apple> inventory) {
 
 하지만 자바 8에서는 코드를 인수로 넘겨줄 수 있으므로 필터 메서드를 중복으로 구현할 필요가 없어 아래와 같이 구현할 수가 있다.
 
-```
+```Java
 public static boolean isHeavyApple(Apple apple) {
     return apple.getWeight() > 150;
 }
@@ -78,7 +78,7 @@ static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p) { //�
 
 위에서 쓰인 Predicate는 인수로 값을 받아 참 또는 거짓을 반환하는 함수를 의미하는 용어이다. 이제 여러 가지 조건을 검증하기 위해서 똑같은 코드를 복사&붙여넣기 하는 식으로 작성할 필요 없이 검증 메서드만 추가적으로 작성하면 된다. `filterApples()`메서드는 다음과 같이 호출하여 조건을 판별할 수 있다.
 
-```
+```Java
 filterApples(inventory, Apple::isHeavyApple);
 ```
 
@@ -86,7 +86,7 @@ filterApples(inventory, Apple::isHeavyApple);
 
 메서드를 값으로 전달하는 것은 유용한 기능이지만 `isHeavyApple`처럼 한두 번만 사용할 메서드를 매번 정의하는 것은 비효율적이다. 자바 8에서는 람다(익명 함수)를 이용하여 이 문제를 해결할 수 있다.
 
-```
+```Java
 filterApples(inventory, (Apple a) -> a.getWeight() > 150);
 ```
 
