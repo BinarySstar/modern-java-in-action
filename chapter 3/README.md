@@ -6,7 +6,7 @@
 
 ### 람다의 기본문법
 
-```Bash
+```Bash 
 (parameters) -> expression
 (parameters) -> {statements;}
 ```
